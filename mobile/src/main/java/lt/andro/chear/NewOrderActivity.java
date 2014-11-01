@@ -1,7 +1,10 @@
 package lt.andro.chear;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,11 +16,15 @@ import butterknife.InjectView;
 import butterknife.OnItemClick;
 import lt.andro.chear.dialog.Dialogs;
 import lt.andro.chear.dialog.NewOrderDialog;
+import lt.andro.chear.oms.Order;
+import lt.andro.chear.oms.OrderManagementSystem;
+import lt.andro.chear.util.WearUtils;
 
 
 public class NewOrderActivity extends FragmentActivity {
 
     private static final String TAG = NewOrderActivity.class.getCanonicalName();
+    private static final int NOT_AVAILABLE = -1;
     @InjectView(R.id.new_order_menu)
     ListView menuListView;
     private ArrayAdapter<String> adapter;
@@ -29,6 +36,9 @@ public class NewOrderActivity extends FragmentActivity {
         ButterKnife.inject(this);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.restaurant_menu_items));
         menuListView.setAdapter(adapter);
+        Intent intent = getIntent();
+
+        handleReplyIntent(intent);
     }
 
     @OnItemClick(R.id.new_order_menu)
@@ -58,5 +68,29 @@ public class NewOrderActivity extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void handleReplyIntent(Intent intent) {
+        CharSequence message = WearUtils.getRejectionMessage(intent);
+        if (!TextUtils.isEmpty(message) && intent.hasExtra(WearUtils.EXTRA_WEAR_ORDER_ID)) {
+            int orderId = intent.getIntExtra(WearUtils.EXTRA_WEAR_ORDER_ID, NOT_AVAILABLE);
+            intent.removeExtra(WearUtils.EXTRA_WEAR_ORDER_ID);
+            showRejectionMessage(orderId, message.toString());
+        }
+    }
+
+    private void showRejectionMessage(int orderId, String message) {
+        Order order = OrderManagementSystem.getInstance().getOrder(orderId);
+        if (order == null) {
+            return;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(order.dishName);
+        if (order.hasSpecialNote()) {
+            message += "\n\nSpecial notes were: " + order.specialNote;
+        }
+        builder.setMessage(message);
+        builder.show();
     }
 }

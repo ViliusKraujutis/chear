@@ -7,6 +7,9 @@
     <string name="new_order_special_notes_field_hint">Special notes</string>
     <string name="new_oder_cancel">Cancel</string>
     <string name="new_order_confirm">Place an order</string>
+    <string name="new_order_has_special_notes">Special!</string>
+    <string name="new_order_page_title">Special:</string>
+    <string name="reject_voice_action_label">Reject</string>
     <string-array name="restaurant_menu_items">
         <item>Yellow curry</item>
         <item>Pizza Pepperoni</item>
@@ -17,5 +20,10 @@
         <item>Nutcutlet Vegan</item>
         <item>Pizza Special</item>
     </string-array>
-
+    <string-array name="rejection_choices">
+        <item>No ingredients left</item>
+        <item>Too busy at the moment</item>
+        <item>Would take too long to prepare</item>
+        <item>Closing soon</item>
+    </string-array>
 </resources>

@@ -1,5 +1,7 @@
 package lt.andro.chear.oms;
 
+import android.text.TextUtils;
+
 /**
  * @author Vilius Kraujutis
  * @since 2014-11-01 16:51
@@ -13,5 +15,9 @@ public class Order {
         this.dishName = dishName;
         this.specialNote = specialNote;
         this.id = id;
+    }
+
+    public boolean hasSpecialNote() {
+        return TextUtils.isEmpty(specialNote);
     }
 }

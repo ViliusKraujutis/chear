@@ -2,6 +2,7 @@ package lt.andro.chear.oms;
 
 import java.util.AbstractCollection;
 import java.util.ArrayList;
+import java.util.List;
 
 import lt.andro.chear.util.NotificationUtil;
 
@@ -12,7 +13,7 @@ import lt.andro.chear.util.NotificationUtil;
 public class OrderManagementSystem {
     private static OrderManagementSystem instance;
 
-    private AbstractCollection<Order> orders = new ArrayList<Order>();
+    private List<Order> orders = new ArrayList<Order>();
 
     public static OrderManagementSystem getInstance() {
         if (instance == null) {
@@ -29,5 +30,13 @@ public class OrderManagementSystem {
 
     private void addNewOrder(Order order) {
         orders.add(order);
+    }
+
+    public Order getOrder(int orderId) {
+        if (0 >= orderId || orderId >= orders.size()) {
+            return null;
+        }
+
+        return orders.get(orderId);
     }
 }
