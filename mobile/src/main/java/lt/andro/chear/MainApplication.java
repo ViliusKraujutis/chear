@@ -8,7 +8,7 @@ import android.content.Context;
  * @since 2014-11-01 16:59
  */
 public class MainApplication extends Application {
-    private static Context context;
+    public static Context context;
 
     @Override public void onCreate() {
         super.onCreate();

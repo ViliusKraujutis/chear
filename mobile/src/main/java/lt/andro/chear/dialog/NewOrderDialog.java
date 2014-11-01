@@ -13,6 +13,7 @@ import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import lt.andro.chear.R;
+import lt.andro.chear.oms.OrderManagementSystem;
 
 /**
  * @author Vilius Kraujutis
@@ -52,7 +53,9 @@ public class NewOrderDialog extends BaseDialog {
     }
 
     @OnClick(R.id.new_oder_confirm) protected void onConfirmClick() {
-        Log.d(TAG, String.format("dishName=%s, specialNote=%s", dishName, getSpecialNote()));
+        String specialNote = getSpecialNote();
+        Log.d(TAG, String.format("dishName=%s, specialNote=%s", dishName, specialNote));
+        OrderManagementSystem.getInstance().addNewOrder(dishName, specialNote);
         dismiss();
     }
 
