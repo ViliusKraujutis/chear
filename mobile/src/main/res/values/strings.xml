@@ -3,5 +3,9 @@
 
     <string name="app_name">Chear</string>
     <string name="action_settings">Settings</string>
+    <string-array name="restaurant_menu_items">
+        <item>Yellow curry</item>
+        <item>Pizza pepperoni</item>
+    </string-array>
 
 </resources>
