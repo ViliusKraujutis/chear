@@ -10,6 +10,7 @@
     <string-array name="restaurant_menu_items">
         <item>Yellow curry</item>
         <item>Pizza pepperoni</item>
+        <item>Pizza margaritta</item>
     </string-array>
 
 </resources>
