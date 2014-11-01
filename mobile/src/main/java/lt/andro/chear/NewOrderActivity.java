@@ -1,19 +1,42 @@
 package lt.andro.chear;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnItemClick;
+import lt.andro.chear.dialog.Dialogs;
+import lt.andro.chear.dialog.NewOrderDialog;
 
 
-public class NewOrderActivity extends Activity {
+public class NewOrderActivity extends FragmentActivity {
+
+    private static final String TAG = NewOrderActivity.class.getCanonicalName();
+    @InjectView(R.id.new_order_menu)
+    ListView menuListView;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
+        ButterKnife.inject(this);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.restaurant_menu_items));
+        menuListView.setAdapter(adapter);
     }
 
+    @OnItemClick(R.id.new_order_menu)
+    protected void onMenuItemClick(int position) {
+        String dishName = adapter.getItem(position);
+        Dialogs.show(NewOrderDialog.newInstance(dishName), this);
+        Log.d(TAG, "new Order: " + dishName);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

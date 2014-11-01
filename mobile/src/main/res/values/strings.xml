@@ -3,6 +3,10 @@
 
     <string name="app_name">Chear</string>
     <string name="action_settings">Settings</string>
+    <string name="new_order_dialog_title">New order</string>
+    <string name="new_order_special_notes_field_hint">Special notes</string>
+    <string name="new_oder_cancel">Cancel</string>
+    <string name="new_order_confirm">Place an order</string>
     <string-array name="restaurant_menu_items">
         <item>Yellow curry</item>
         <item>Pizza pepperoni</item>
