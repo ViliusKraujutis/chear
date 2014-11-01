@@ -9,8 +9,11 @@
     <string name="new_order_confirm">Place an order</string>
     <string-array name="restaurant_menu_items">
         <item>Yellow curry</item>
-        <item>Pizza pepperoni</item>
-        <item>Pizza margaritta</item>
+        <item>Pizza Pepperoni</item>
+        <item>Pizza Margaritta</item>
+        <item>Pizza Nepolitina</item>
+        <item>Pasta Vegetarian</item>
+        <item>Pizza Mushroom</item>
     </string-array>
 
 </resources>
