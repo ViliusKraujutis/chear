@@ -5,39 +5,44 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.InjectView;
 import lt.andro.chear.R;
 import lt.andro.chear.oms.Dish;
-import lt.andro.chear.oms.Order;
 
 /**
- * Created by alon on 02/11/14.
+ * @author Alon
+ * @since 02/11/14
  */
-public class DishAdapter extends ArrayAdapter<Dish>{
-
-
+public class DishAdapter extends ArrayAdapter<Dish> {
     public DishAdapter(Context c, ArrayList<Dish> orders) {
-        super(c,0,orders);
+        super(c, 0, orders);
     }
 
-    // create a new ImageView for each item referenced by the Adapter
+    /**
+     * create a new ImageView for each item referenced by the Adapter
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
         Dish dish = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.dish_item, parent, false);
         }
-        TextView dishNameTV = (TextView) convertView.findViewById(R.id.dish_item_name);
-        ImageView dishImageView = (ImageView) convertView.findViewById(R.id.dish_item_image);
+        ViewHolder viewHolder = BaseViewHolder.getViewHolder(convertView, ViewHolder.class);
 
-        dishNameTV.setText(dish.getDishName());
-        dishImageView.setImageResource(dish.getImageResId());
+        viewHolder.name.setText(dish.getDishName());
+        viewHolder.image.setImageResource(dish.getImageResId());
 
         return convertView;
+    }
+
+    public static class ViewHolder extends BaseViewHolder {
+        @InjectView(R.id.dish_item_name)
+        public TextView name;
+        @InjectView(R.id.dish_item_image)
+        public ImageView image;
     }
 }

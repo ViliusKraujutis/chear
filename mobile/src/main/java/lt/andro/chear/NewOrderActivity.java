@@ -28,10 +28,10 @@ public class NewOrderActivity extends FragmentActivity {
 
     private static final String TAG = NewOrderActivity.class.getCanonicalName();
     private static final int NOT_AVAILABLE = -1;
-   // @InjectView(R.id.new_order_menu)
-    //ListView menuListView;
+
     @InjectView(R.id.gridview_order_menu)
     GridView menuGridView;
+
     private DishAdapter adapter;
     private ArrayList<Dish> mDishes = new ArrayList<Dish>();
 
@@ -41,14 +41,14 @@ public class NewOrderActivity extends FragmentActivity {
         setContentView(R.layout.activity_new_order);
         ButterKnife.inject(this);
         populateDishesData();
-        adapter = new DishAdapter(this,mDishes);
+        adapter = new DishAdapter(this, mDishes);
         menuGridView.setAdapter(adapter);
         Intent intent = getIntent();
 
         handleReplyIntent(intent);
     }
 
-    public void populateDishesData(){
+    public void populateDishesData() {
         mDishes.add(new Dish("dish_nutcutlet", "none", R.drawable.dish_nutcutlet));
         mDishes.add(new Dish("pasta", "none", R.drawable.dish_pasta));
         mDishes.add(new Dish("dish_pepperoni_pizza", "none", R.drawable.dish_pepperoni_pizza));
