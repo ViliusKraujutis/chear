@@ -20,7 +20,7 @@ import lt.andro.chear.oms.Dish;
 import lt.andro.chear.oms.DishMenu;
 import lt.andro.chear.oms.Order;
 import lt.andro.chear.oms.OrderManagementSystem;
-import lt.andro.chear.util.WearUtils;
+import lt.andro.chear.util.NotificationUtil;
 
 
 public class NewOrderActivity extends FragmentActivity {
@@ -78,10 +78,10 @@ public class NewOrderActivity extends FragmentActivity {
 
 
     private void handleReplyIntent(Intent intent) {
-        CharSequence message = WearUtils.getRejectionMessage(intent);
-        if (!TextUtils.isEmpty(message) && intent.hasExtra(WearUtils.EXTRA_WEAR_ORDER_ID)) {
-            int orderId = intent.getIntExtra(WearUtils.EXTRA_WEAR_ORDER_ID, NOT_AVAILABLE);
-            intent.removeExtra(WearUtils.EXTRA_WEAR_ORDER_ID);
+        CharSequence message = NotificationUtil.getRejectionMessage(intent);
+        if (!TextUtils.isEmpty(message) && intent.hasExtra(NotificationUtil.EXTRA_WEAR_ORDER_ID)) {
+            int orderId = intent.getIntExtra(NotificationUtil.EXTRA_WEAR_ORDER_ID, NOT_AVAILABLE);
+            intent.removeExtra(NotificationUtil.EXTRA_WEAR_ORDER_ID);
             showRejectionMessage(orderId, message.toString());
         }
     }
