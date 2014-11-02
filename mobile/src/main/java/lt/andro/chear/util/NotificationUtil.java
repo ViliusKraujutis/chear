@@ -85,7 +85,7 @@ public class NotificationUtil {
     }
 
 
-    public static NotificationManager getNotificationService() {
+    private static NotificationManager getNotificationService() {
         return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
