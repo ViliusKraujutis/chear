@@ -10,6 +10,8 @@
     <string name="new_order_has_special_notes">Special!</string>
     <string name="new_order_page_title">Special:</string>
     <string name="reject_voice_action_label">Reject</string>
+    <string name="order_completion_dialog_title">Done</string>
+    <string name="ok_confirmation_button">OK</string>
     <string-array name="rejection_choices">
         <item>No ingredients left</item>
         <item>Too busy at the moment</item>

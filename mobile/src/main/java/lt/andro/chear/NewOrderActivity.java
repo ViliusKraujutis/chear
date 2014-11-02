@@ -1,8 +1,10 @@
 package lt.andro.chear;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,6 +23,8 @@ import lt.andro.chear.oms.DishMenu;
 import lt.andro.chear.oms.Order;
 import lt.andro.chear.oms.OrderManagementSystem;
 import lt.andro.chear.util.NotificationUtil;
+
+import static lt.andro.chear.MainApplication.realm;
 
 
 public class NewOrderActivity extends FragmentActivity {
@@ -44,7 +48,7 @@ public class NewOrderActivity extends FragmentActivity {
         menuGridView.setAdapter(adapter);
         Intent intent = getIntent();
 
-        handleReplyIntent(intent);
+        handleRejectionDoneIntent(intent);
     }
 
     @OnItemClick(R.id.gridview_order_menu)
@@ -77,20 +81,32 @@ public class NewOrderActivity extends FragmentActivity {
     }
 
 
-    private void handleReplyIntent(Intent intent) {
-        CharSequence message = NotificationUtil.getRejectionMessage(intent);
-        if (!TextUtils.isEmpty(message) && intent.hasExtra(NotificationUtil.EXTRA_WEAR_ORDER_ID)) {
+    private void handleRejectionDoneIntent(Intent intent) {
+        if (intent.hasExtra(NotificationUtil.EXTRA_WEAR_ORDER_ID)) {
+            CharSequence message = NotificationUtil.getRejectionMessage(intent);
             int orderId = intent.getIntExtra(NotificationUtil.EXTRA_WEAR_ORDER_ID, NOT_AVAILABLE);
+            Order order = OrderManagementSystem.getInstance().getOrder(orderId);
+            if (order == null) return;
             intent.removeExtra(NotificationUtil.EXTRA_WEAR_ORDER_ID);
-            showRejectionMessage(orderId, message.toString());
+            if (!TextUtils.isEmpty(message)) {
+                showRejectionMessage(order, message.toString());
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                        .setTitle(R.string.order_completion_dialog_title)
+                        .setMessage(order.getDishName() + "\n\n" + order.getSpecialNote())
+                        .setPositiveButton(R.string.ok_confirmation_button, new DialogInterface.OnClickListener() {
+                            @Override public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.show();
+
+                realm.where(Order.class).equalTo("id", orderId).findAll().first().setStatus(Order.Status.COMPLETED);
+            }
         }
     }
 
-    private void showRejectionMessage(int orderId, String message) {
-        Order order = OrderManagementSystem.getInstance().getOrder(orderId);
-        if (order == null) {
-            return;
-        }
+    private void showRejectionMessage(@NonNull Order order, @NonNull String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(order.getDishName());
         String specialNote = order.getSpecialNote();

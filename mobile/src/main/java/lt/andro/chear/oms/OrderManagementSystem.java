@@ -3,9 +3,7 @@ package lt.andro.chear.oms;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
-
-import static lt.andro.chear.MainApplication.context;
+import static lt.andro.chear.MainApplication.realm;
 
 /**
  * @author Vilius Kraujutis
@@ -13,12 +11,10 @@ import static lt.andro.chear.MainApplication.context;
  */
 public class OrderManagementSystem {
     private static OrderManagementSystem instance;
-    private Realm realm;
 
     private List<Order> orders = new ArrayList<Order>();
 
     public OrderManagementSystem() {
-        realm = Realm.getInstance(context);
         // TODO populate data from realm
     }
 
@@ -38,7 +34,7 @@ public class OrderManagementSystem {
         realm.commitTransaction();
 
         addNewOrder(order);
-return order;
+        return order;
     }
 
     private void addNewOrder(Order order) {
