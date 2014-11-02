@@ -13,6 +13,7 @@ import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import lt.andro.chear.R;
+import lt.andro.chear.oms.Dish;
 import lt.andro.chear.oms.OrderManagementSystem;
 
 /**
@@ -63,10 +64,10 @@ public class NewOrderDialog extends BaseDialog {
         dismiss();
     }
 
-    public static NewOrderDialog newInstance(String dishName) {
+    public static NewOrderDialog newInstance(Dish dish) {
         Bundle args = new Bundle();
         NewOrderDialog dialog = new NewOrderDialog();
-        args.putString(KEY_DISH_NAME, dishName);
+        args.putString(KEY_DISH_NAME, dish.getDishName());
         dialog.setArguments(args);
         return dialog;
     }

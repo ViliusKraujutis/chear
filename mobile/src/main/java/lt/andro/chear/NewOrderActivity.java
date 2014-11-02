@@ -1,6 +1,7 @@
 package lt.andro.chear;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -8,14 +9,23 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
+import lt.andro.chear.adapters.DishAdapter;
 import lt.andro.chear.dialog.Dialogs;
 import lt.andro.chear.dialog.NewOrderDialog;
+import lt.andro.chear.oms.Dish;
 import lt.andro.chear.oms.Order;
 import lt.andro.chear.oms.OrderManagementSystem;
 import lt.andro.chear.util.WearUtils;
@@ -25,27 +35,39 @@ public class NewOrderActivity extends FragmentActivity {
 
     private static final String TAG = NewOrderActivity.class.getCanonicalName();
     private static final int NOT_AVAILABLE = -1;
-    @InjectView(R.id.new_order_menu)
-    ListView menuListView;
-    private ArrayAdapter<String> adapter;
+   // @InjectView(R.id.new_order_menu)
+    //ListView menuListView;
+    @InjectView(R.id.gridview_order_menu)
+    GridView menuGridView;
+    private DishAdapter adapter;
+    private ArrayList<Dish> mDishes = new ArrayList<Dish>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
         ButterKnife.inject(this);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.restaurant_menu_items));
-        menuListView.setAdapter(adapter);
+        populateDishesData();
+        adapter = new DishAdapter(this,mDishes);
+        menuGridView.setAdapter(adapter);
         Intent intent = getIntent();
 
         handleReplyIntent(intent);
     }
 
-    @OnItemClick(R.id.new_order_menu)
+    public void populateDishesData(){
+        mDishes.add(new Dish("pasta", "none", R.drawable.ic_launcher));
+        mDishes.add(new Dish("pasta", "none", R.drawable.ic_launcher));
+        mDishes.add(new Dish("pasta", "none", R.drawable.ic_launcher));
+        mDishes.add(new Dish("pasta", "none", R.drawable.ic_launcher));
+
+    }
+
+    @OnItemClick(R.id.gridview_order_menu)
     protected void onMenuItemClick(int position) {
-        String dishName = adapter.getItem(position);
-        Dialogs.show(NewOrderDialog.newInstance(dishName), this);
-        Log.d(TAG, "new Order: " + dishName);
+        Dish dish = adapter.getItem(position);
+        Dialogs.show(NewOrderDialog.newInstance(dish), this);
+        Log.d(TAG, "new Order: " + dish.getDishName());
     }
 
     @Override
