@@ -1,8 +1,6 @@
 package lt.andro.chear;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -131,14 +129,14 @@ public class NewOrderActivity extends FragmentActivity {
     }
 
     private void showDoneDialog(Order order) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle(R.string.order_completion_dialog_title)
-                .setMessage(order.getDishName() + "\n\n" + order.getSpecialNote())
-                .setPositiveButton(R.string.ok_confirmation_button, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.order_completion_dialog_title);
+        builder.setMessage(order.getDishName() + "\n\n" + order.getSpecialNote());
+        builder.setPositiveButton(R.string.ok_confirmation_button, new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
         builder.show();
     }
 
@@ -150,6 +148,11 @@ public class NewOrderActivity extends FragmentActivity {
             message += "\n\nSpecial notes were: " + specialNote;
         }
         builder.setMessage(message);
+        builder.setPositiveButton(R.string.ok_confirmation_button, new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
         builder.show();
     }
 
@@ -184,10 +187,10 @@ public class NewOrderActivity extends FragmentActivity {
             String title = "Menu";
             switch (position) {
                 case 0:
-                    title  = "Menu";
+                    title = "Menu";
                     break;
                 case 1:
-                    title  = "Pending Orders";
+                    title = "Pending Orders";
                     break;
             }
             return title;

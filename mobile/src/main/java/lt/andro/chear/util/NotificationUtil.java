@@ -28,6 +28,7 @@ public class NotificationUtil {
     public static final String REJECT_RESULT_KEY = "REJECT_RESULT_KEY";
     public static final String EXTRA_WEAR_ORDER_ID = "EXTRA_WEAR_ORDER_ID";
     public static final int WEAR_REJECTION_REQUEST_CODE = 1;
+    public static final int WEAR_REJECTION_DONE_CODE = 2;
     private static final String GROUP_KEY_ORDERS = "GROUP_KEY_ORDERS";
     public static final int LONG_NOTIFICATION_LENGTH = 15;
 
@@ -45,8 +46,8 @@ public class NotificationUtil {
         Intent doneIntent = new Intent(context, NewOrderActivity.class);
         doneIntent.putExtra(EXTRA_WEAR_ORDER_ID, order.getId());
 
-        PendingIntent donePendintIntent = PendingIntent.getActivity(context, 0, doneIntent, 0);
-        NotificationCompat.Action.Builder doneBuilder = new NotificationCompat.Action.Builder(R.drawable.ic_launcher, context.getString(R.string.notification_done_label), donePendintIntent);
+        PendingIntent donePendingIntent = PendingIntent.getActivity(context, WEAR_REJECTION_DONE_CODE, doneIntent, 0);
+        NotificationCompat.Action.Builder doneBuilder = new NotificationCompat.Action.Builder(R.drawable.ic_launcher, context.getString(R.string.notification_done_label), donePendingIntent);
         builder.extend(extender.addAction(doneBuilder.build()));
 
         // add REJECTION action

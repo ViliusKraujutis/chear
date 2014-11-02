@@ -47,7 +47,7 @@ public class OrderManagementSystem {
     }
 
     public Order getOrder(int orderId) {
-        if (0 >= orderId || orderId >= orders.size()) {
+        if (0 > orderId || orderId >= orders.size()) {
             return null;
         }
 
