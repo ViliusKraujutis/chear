@@ -123,26 +123,30 @@ public class NewOrderActivity extends FragmentActivity {
             if (!TextUtils.isEmpty(message)) {
                 showRejectionMessage(order, message.toString());
             } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                        .setTitle(R.string.order_completion_dialog_title)
-                        .setMessage(order.getDishName() + "\n\n" + order.getSpecialNote())
-                        .setPositiveButton(R.string.ok_confirmation_button, new DialogInterface.OnClickListener() {
-                            @Override public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                builder.show();
+                showDoneDialog(order);
 
                 realm.where(Order.class).equalTo("id", orderId).findAll().first().setStatus(Order.Status.COMPLETED);
             }
         }
     }
 
+    private void showDoneDialog(Order order) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle(R.string.order_completion_dialog_title)
+                .setMessage(order.getDishName() + "\n\n" + order.getSpecialNote())
+                .setPositiveButton(R.string.ok_confirmation_button, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
+    }
+
     private void showRejectionMessage(@NonNull Order order, @NonNull String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(order.getDishName());
+        builder.setTitle("Rejected: " + order.getDishName());
         String specialNote = order.getSpecialNote();
-        if (TextUtils.isEmpty(specialNote)) {
+        if (!TextUtils.isEmpty(specialNote)) {
             message += "\n\nSpecial notes were: " + specialNote;
         }
         builder.setMessage(message);

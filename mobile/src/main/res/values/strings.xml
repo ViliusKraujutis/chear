@@ -12,6 +12,7 @@
     <string name="reject_voice_action_label">Reject</string>
     <string name="order_completion_dialog_title">Done</string>
     <string name="ok_confirmation_button">OK</string>
+    <string name="notification_done_label">Done</string>
     <string-array name="rejection_choices">
         <item>No ingredients left</item>
         <item>Too busy at the moment</item>
