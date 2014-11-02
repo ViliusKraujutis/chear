@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 
 import lt.andro.chear.R;
+import lt.andro.chear.oms.Dish;
+import lt.andro.chear.oms.DishMenu;
 import lt.andro.chear.oms.Order;
 
 import static lt.andro.chear.MainApplication.context;
@@ -24,10 +26,15 @@ public class NotificationUtil {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         NotificationCompat.WearableExtender extender = new NotificationCompat.WearableExtender();
 
+        String dishName = order.getDishName();
+        Dish dish = DishMenu.getInstance().getDish(dishName);
+        if (dish == null) {
+            return;
+        }
         WearUtils.addDoneAction(builder, order);
         WearUtils.addRejectAction(builder, order);
 
-        builder.setContentTitle(order.getDishName());
+        builder.setContentTitle(dishName);
         String specialNote = order.getSpecialNote();
         if (isLongNote(specialNote)) {
             builder.setContentText(context.getString(R.string.new_order_has_special_notes));
@@ -37,6 +44,8 @@ public class NotificationUtil {
         }
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setGroup(GROUP_KEY_ORDERS);
+
+        builder.setLargeIcon(dish.getDishImage());
 
         final Notification notification = builder.build();
         notification.flags |= Notification.FLAG_SHOW_LIGHTS;

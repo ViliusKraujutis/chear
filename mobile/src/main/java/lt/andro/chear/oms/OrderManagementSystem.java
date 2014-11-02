@@ -1,11 +1,9 @@
 package lt.andro.chear.oms;
 
-import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import lt.andro.chear.util.NotificationUtil;
 
 import static lt.andro.chear.MainApplication.context;
 

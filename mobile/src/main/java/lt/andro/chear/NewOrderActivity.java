@@ -10,8 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import java.util.ArrayList;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
