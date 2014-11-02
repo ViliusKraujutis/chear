@@ -14,7 +14,9 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import lt.andro.chear.R;
 import lt.andro.chear.oms.Dish;
+import lt.andro.chear.oms.Order;
 import lt.andro.chear.oms.OrderManagementSystem;
+import lt.andro.chear.util.NotificationUtil;
 
 /**
  * @author Vilius Kraujutis
@@ -56,7 +58,9 @@ public class NewOrderDialog extends BaseDialog {
     @OnClick(R.id.new_oder_confirm) protected void onConfirmClick() {
         String specialNote = getSpecialNote();
         Log.d(TAG, String.format("dishName=%s, specialNote=%s", dishName, specialNote));
-        OrderManagementSystem.getInstance().addNewOrder(dishName, specialNote);
+        Order order = OrderManagementSystem.getInstance().addNewOrder(dishName, specialNote);
+
+        NotificationUtil.showOrderNotification(order);
         dismiss();
     }
 

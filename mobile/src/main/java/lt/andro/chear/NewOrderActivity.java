@@ -10,8 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import java.util.ArrayList;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
@@ -19,6 +17,7 @@ import lt.andro.chear.adapters.DishAdapter;
 import lt.andro.chear.dialog.Dialogs;
 import lt.andro.chear.dialog.NewOrderDialog;
 import lt.andro.chear.oms.Dish;
+import lt.andro.chear.oms.DishMenu;
 import lt.andro.chear.oms.Order;
 import lt.andro.chear.oms.OrderManagementSystem;
 import lt.andro.chear.util.WearUtils;
@@ -34,28 +33,18 @@ public class NewOrderActivity extends FragmentActivity {
     GridView menuGridView;
 
     private DishAdapter adapter;
-    private ArrayList<Dish> mDishes = new ArrayList<Dish>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
         ButterKnife.inject(this);
-        populateDishesData();
-        adapter = new DishAdapter(this, mDishes);
+        adapter = new DishAdapter(this, DishMenu.getInstance().getDishes());
         menuGridView.setNumColumns(NUM_COLUMNS);
         menuGridView.setAdapter(adapter);
         Intent intent = getIntent();
 
         handleReplyIntent(intent);
-    }
-
-    public void populateDishesData() {
-        mDishes.add(new Dish("Nutcutlet", R.drawable.dish_nutcutlet));
-        mDishes.add(new Dish("Pasta", R.drawable.dish_pasta));
-        mDishes.add(new Dish("Pizza Pepperoni", R.drawable.dish_pepperoni_pizza));
-        mDishes.add(new Dish("Pizza Rozmarinpesto", R.drawable.dish_pizza_med_rosmarinpesto));
-        mDishes.add(new Dish("Pizza Nepolitana", R.drawable.dish_nepolitana));
     }
 
     @OnItemClick(R.id.gridview_order_menu)

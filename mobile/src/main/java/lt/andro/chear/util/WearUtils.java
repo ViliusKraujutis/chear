@@ -37,13 +37,12 @@ public class WearUtils {
         String rejectLabel = resources.getString(R.string.reject_voice_action_label);
         String[] rejectChoices = resources.getStringArray(R.array.rejection_choices);
 
-
         RemoteInput remoteInput = new RemoteInput.Builder(REJECT_RESULT_KEY)
                 .setLabel(rejectLabel)
                 .setChoices(rejectChoices)
                 .build();
 
-        // Create an intent for the reply action
+        // Create an intent for the rejection action
         Intent rejectionIntent = new Intent(context, NewOrderActivity.class);
         rejectionIntent.putExtra(EXTRA_WEAR_ORDER_ID, order.getId());
         PendingIntent replyPendingIntent =

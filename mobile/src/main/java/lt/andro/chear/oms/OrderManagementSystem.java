@@ -1,11 +1,9 @@
 package lt.andro.chear.oms;
 
-import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import lt.andro.chear.util.NotificationUtil;
 
 import static lt.andro.chear.MainApplication.context;
 
@@ -31,7 +29,7 @@ public class OrderManagementSystem {
         return instance;
     }
 
-    public void addNewOrder(String dishName, String specialNote) {
+    public Order addNewOrder(String dishName, String specialNote) {
         realm.beginTransaction();
         Order order = realm.createObject(Order.class);
         order.setId(orders.size());
@@ -40,8 +38,7 @@ public class OrderManagementSystem {
         realm.commitTransaction();
 
         addNewOrder(order);
-
-        NotificationUtil.showOrderNotification(order);
+return order;
     }
 
     private void addNewOrder(Order order) {
