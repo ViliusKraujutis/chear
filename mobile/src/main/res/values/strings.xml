@@ -10,16 +10,6 @@
     <string name="new_order_has_special_notes">Special!</string>
     <string name="new_order_page_title">Special:</string>
     <string name="reject_voice_action_label">Reject</string>
-    <string-array name="restaurant_menu_items">
-        <item>Yellow curry</item>
-        <item>Pizza Pepperoni</item>
-        <item>Pizza Margaritta</item>
-        <item>Pizza Nepolitina</item>
-        <item>Pasta Vegetarian</item>
-        <item>Pizza Mushroom</item>
-        <item>Nutcutlet Vegan</item>
-        <item>Pizza Special</item>
-    </string-array>
     <string-array name="rejection_choices">
         <item>No ingredients left</item>
         <item>Too busy at the moment</item>
