@@ -28,6 +28,7 @@ public class NewOrderActivity extends FragmentActivity {
 
     private static final String TAG = NewOrderActivity.class.getCanonicalName();
     private static final int NOT_AVAILABLE = -1;
+    public static final int NUM_COLUMNS = 2;
 
     @InjectView(R.id.gridview_order_menu)
     GridView menuGridView;
@@ -42,6 +43,7 @@ public class NewOrderActivity extends FragmentActivity {
         ButterKnife.inject(this);
         populateDishesData();
         adapter = new DishAdapter(this, mDishes);
+        menuGridView.setNumColumns(NUM_COLUMNS);
         menuGridView.setAdapter(adapter);
         Intent intent = getIntent();
 

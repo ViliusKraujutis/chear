@@ -24,7 +24,7 @@ public class DishAdapter extends ArrayAdapter<Dish> {
     }
 
     /**
-     * create a new ImageView for each item referenced by the Adapter
+     * Create a new ImageView for each item referenced by the Adapter
      */
     public View getView(int position, View convertView, ViewGroup parent) {
         Dish dish = getItem(position);
