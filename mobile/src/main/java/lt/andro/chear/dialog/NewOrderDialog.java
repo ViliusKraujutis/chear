@@ -23,6 +23,12 @@ import lt.andro.chear.util.NotificationUtil;
  * @since 2014-11-01 16:18
  */
 public class NewOrderDialog extends BaseDialog {
+
+    private static IConfirmOrder mListener;
+
+    public interface IConfirmOrder{
+        void onOrderConfirmed();
+    }
     private static final String KEY_DISH_NAME = "KEY_DISH_NAME";
     private static final String TAG = NewOrderDialog.class.getCanonicalName();
     @InjectView(R.id.new_oder_dish_name)
@@ -59,7 +65,9 @@ public class NewOrderDialog extends BaseDialog {
         String specialNote = getSpecialNote();
         Log.d(TAG, String.format("dishName=%s, specialNote=%s", dishName, specialNote));
         Order order = OrderManagementSystem.getInstance().addNewOrder(dishName, specialNote);
-
+        if (mListener!=null){
+            mListener.onOrderConfirmed();
+        }
         NotificationUtil.showOrderNotification(order);
         dismiss();
     }
@@ -68,11 +76,12 @@ public class NewOrderDialog extends BaseDialog {
         dismiss();
     }
 
-    public static NewOrderDialog newInstance(Dish dish) {
+    public static NewOrderDialog newInstance(Dish dish, IConfirmOrder listener) {
         Bundle args = new Bundle();
         NewOrderDialog dialog = new NewOrderDialog();
         args.putString(KEY_DISH_NAME, dish.getDishName());
         dialog.setArguments(args);
+        mListener= listener;
         return dialog;
     }
 

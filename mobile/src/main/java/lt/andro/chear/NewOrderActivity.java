@@ -80,9 +80,14 @@ public class NewOrderActivity extends FragmentActivity {
     @OnItemClick(R.id.gridview_order_menu)
     protected void onMenuItemClick(int position) {
         Dish dish = menuAdapter.getItem(position);
-        Dialogs.show(NewOrderDialog.newInstance(dish), this);
+        Dialogs.show(NewOrderDialog.newInstance(dish, new NewOrderDialog.IConfirmOrder() {
+            @Override
+            public void onOrderConfirmed() {
+                pendingOrdersAdapter.notifyDataSetChanged();
+            }
+        }), this);
         Log.d(TAG, "new Order: " + dish.getDishName());
-        pendingOrdersGridView.invalidate();
+
     }
 
     @Override

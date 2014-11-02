@@ -1,5 +1,6 @@
 package lt.andro.chear.oms;
 
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
