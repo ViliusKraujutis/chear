@@ -70,9 +70,7 @@ public class NewOrderActivity extends FragmentActivity {
     }
 
     private void setViewPager() {
-
         mViewPager = (ViewPager) findViewById(R.id.pager);
-
         // Set the ViewPager adapter
         WizardPagerAdapter wizardAdapter = new WizardPagerAdapter();
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
