@@ -51,13 +51,11 @@ public class NewOrderActivity extends FragmentActivity {
     }
 
     public void populateDishesData() {
-        mDishes.add(new Dish("dish_nutcutlet", "none", R.drawable.dish_nutcutlet));
-        mDishes.add(new Dish("pasta", "none", R.drawable.dish_pasta));
-        mDishes.add(new Dish("dish_pepperoni_pizza", "none", R.drawable.dish_pepperoni_pizza));
-        mDishes.add(new Dish("dish_pizza_med_rosmarinpesto", "none", R.drawable.dish_pizza_med_rosmarinpesto));
-        mDishes.add(new Dish("dish_nepolitana", "none", R.drawable.dish_nepolitana));
-
-
+        mDishes.add(new Dish("Nutcutlet", R.drawable.dish_nutcutlet));
+        mDishes.add(new Dish("Pasta", R.drawable.dish_pasta));
+        mDishes.add(new Dish("Pizza Pepperoni", R.drawable.dish_pepperoni_pizza));
+        mDishes.add(new Dish("Pizza Rozmarinpesto", R.drawable.dish_pizza_med_rosmarinpesto));
+        mDishes.add(new Dish("Pizza Nepolitana", R.drawable.dish_nepolitana));
     }
 
     @OnItemClick(R.id.gridview_order_menu)
