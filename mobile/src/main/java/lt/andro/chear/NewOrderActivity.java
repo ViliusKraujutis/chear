@@ -1,7 +1,6 @@
 package lt.andro.chear;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,13 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -56,10 +49,12 @@ public class NewOrderActivity extends FragmentActivity {
     }
 
     public void populateDishesData(){
-        mDishes.add(new Dish("pasta", "none", R.drawable.ic_launcher));
-        mDishes.add(new Dish("pasta", "none", R.drawable.ic_launcher));
-        mDishes.add(new Dish("pasta", "none", R.drawable.ic_launcher));
-        mDishes.add(new Dish("pasta", "none", R.drawable.ic_launcher));
+        mDishes.add(new Dish("dish_nutcutlet", "none", R.drawable.dish_nutcutlet));
+        mDishes.add(new Dish("pasta", "none", R.drawable.dish_pasta));
+        mDishes.add(new Dish("dish_pepperoni_pizza", "none", R.drawable.dish_pepperoni_pizza));
+        mDishes.add(new Dish("dish_pizza_med_rosmarinpesto", "none", R.drawable.dish_pizza_med_rosmarinpesto));
+        mDishes.add(new Dish("dish_nepolitana", "none", R.drawable.dish_nepolitana));
+
 
     }
 
