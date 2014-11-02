@@ -31,7 +31,7 @@ public class OrderManagementSystem {
         return instance;
     }
 
-    public void addNewOrder(String dishName, String specialNote) {
+    public Order addNewOrder(String dishName, String specialNote) {
         realm.beginTransaction();
         Order order = realm.createObject(Order.class);
         order.setId(orders.size());
@@ -40,8 +40,7 @@ public class OrderManagementSystem {
         realm.commitTransaction();
 
         addNewOrder(order);
-
-        NotificationUtil.showOrderNotification(order);
+return order;
     }
 
     private void addNewOrder(Order order) {
