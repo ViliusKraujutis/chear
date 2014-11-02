@@ -1,21 +1,27 @@
 package lt.andro.chear;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.GridView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 import lt.andro.chear.adapters.DishAdapter;
+import lt.andro.chear.adapters.OrdersAdapter;
 import lt.andro.chear.dialog.Dialogs;
 import lt.andro.chear.dialog.NewOrderDialog;
 import lt.andro.chear.oms.Dish;
@@ -36,26 +42,49 @@ public class NewOrderActivity extends FragmentActivity {
     @InjectView(R.id.gridview_order_menu)
     GridView menuGridView;
 
-    private DishAdapter adapter;
+    @InjectView(R.id.gridview_pending_orders)
+    GridView pendingOrdersGridView;
+
+    private DishAdapter menuAdapter;
+    private OrdersAdapter pendingOrdersAdapter;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
         ButterKnife.inject(this);
-        adapter = new DishAdapter(this, DishMenu.getInstance().getDishes());
+        setViewPager();
+
+        menuAdapter = new DishAdapter(this, DishMenu.getInstance().getDishes());
         menuGridView.setNumColumns(NUM_COLUMNS);
-        menuGridView.setAdapter(adapter);
+        menuGridView.setAdapter(menuAdapter);
+
+        pendingOrdersAdapter = new OrdersAdapter(this, OrderManagementSystem.getInstance().getPendingOrders());
+        pendingOrdersGridView.setNumColumns(NUM_COLUMNS);
+        pendingOrdersGridView.setAdapter(pendingOrdersAdapter);
+
         Intent intent = getIntent();
 
         handleRejectionDoneIntent(intent);
     }
 
+    private void setViewPager() {
+
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+
+        // Set the ViewPager adapter
+        WizardPagerAdapter wizardAdapter = new WizardPagerAdapter();
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(wizardAdapter);
+    }
+
     @OnItemClick(R.id.gridview_order_menu)
     protected void onMenuItemClick(int position) {
-        Dish dish = adapter.getItem(position);
+        Dish dish = menuAdapter.getItem(position);
         Dialogs.show(NewOrderDialog.newInstance(dish), this);
         Log.d(TAG, "new Order: " + dish.getDishName());
+        pendingOrdersGridView.invalidate();
     }
 
     @Override
@@ -116,4 +145,46 @@ public class NewOrderActivity extends FragmentActivity {
         builder.setMessage(message);
         builder.show();
     }
+
+    class WizardPagerAdapter extends PagerAdapter {
+
+        public Object instantiateItem(View collection, int position) {
+
+            int resId = 0;
+            switch (position) {
+                case 0:
+                    resId = R.id.page_one;
+                    break;
+                case 1:
+                    resId = R.id.page_two;
+                    break;
+            }
+            return findViewById(resId);
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            return arg0 == ((View) arg1);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            String title = "Menu";
+            switch (position) {
+                case 0:
+                    title  = "Menu";
+                    break;
+                case 1:
+                    title  = "Pending Orders";
+                    break;
+            }
+            return title;
+        }
+    }
+
 }

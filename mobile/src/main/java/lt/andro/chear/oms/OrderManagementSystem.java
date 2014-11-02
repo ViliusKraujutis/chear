@@ -1,7 +1,11 @@
 package lt.andro.chear.oms;
 
+import android.widget.ArrayAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.RealmResults;
 
 import static lt.andro.chear.MainApplication.realm;
 
@@ -47,5 +51,10 @@ public class OrderManagementSystem {
         }
 
         return orders.get(orderId);
+    }
+
+    public RealmResults<Order> getPendingOrders() {
+        RealmResults<Order> pendingOrders = realm.where(Order.class).equalTo("status", Order.Status.PENDING).findAll();
+        return pendingOrders;
     }
 }
