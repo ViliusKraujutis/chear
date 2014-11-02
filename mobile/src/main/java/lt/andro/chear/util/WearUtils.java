@@ -45,7 +45,7 @@ public class WearUtils {
 
         // Create an intent for the reply action
         Intent rejectionIntent = new Intent(context, NewOrderActivity.class);
-        rejectionIntent.putExtra(EXTRA_WEAR_ORDER_ID, order.id);
+        rejectionIntent.putExtra(EXTRA_WEAR_ORDER_ID, order.getId());
         PendingIntent replyPendingIntent =
                 PendingIntent.getActivity(context, WEAR_REJECTION_REQUEST_CODE, rejectionIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT);
@@ -78,7 +78,7 @@ public class WearUtils {
     public static void addDoneAction(NotificationCompat.Builder builder, Order order) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")); // TODO dismiss notification and mark order as done
 
-        intent.putExtra(EXTRA_WEAR_ORDER_ID, order.id);
+        intent.putExtra(EXTRA_WEAR_ORDER_ID, order.getId());
 
         PendingIntent actionIntent = PendingIntent.getActivity(context, 0, intent, 0);
         builder.addAction(R.drawable.ic_launcher, "Done", actionIntent);//TODO replace launcher icon

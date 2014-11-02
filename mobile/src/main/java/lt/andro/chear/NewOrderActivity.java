@@ -103,9 +103,10 @@ public class NewOrderActivity extends FragmentActivity {
             return;
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(order.dishName);
-        if (order.hasSpecialNote()) {
-            message += "\n\nSpecial notes were: " + order.specialNote;
+        builder.setTitle(order.getDishName());
+        String specialNote = order.getSpecialNote();
+        if (TextUtils.isEmpty(specialNote)) {
+            message += "\n\nSpecial notes were: " + specialNote;
         }
         builder.setMessage(message);
         builder.show();

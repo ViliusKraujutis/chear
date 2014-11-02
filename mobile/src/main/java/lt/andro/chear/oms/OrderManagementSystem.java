@@ -4,7 +4,10 @@ import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
 import lt.andro.chear.util.NotificationUtil;
+
+import static lt.andro.chear.MainApplication.context;
 
 /**
  * @author Vilius Kraujutis
@@ -12,8 +15,14 @@ import lt.andro.chear.util.NotificationUtil;
  */
 public class OrderManagementSystem {
     private static OrderManagementSystem instance;
+    private Realm realm;
 
     private List<Order> orders = new ArrayList<Order>();
+
+    public OrderManagementSystem() {
+        realm = Realm.getInstance(context);
+        // TODO populate data from realm
+    }
 
     public static OrderManagementSystem getInstance() {
         if (instance == null) {
@@ -23,8 +32,15 @@ public class OrderManagementSystem {
     }
 
     public void addNewOrder(String dishName, String specialNote) {
-        Order order = new Order(dishName, specialNote, orders.size());
+        realm.beginTransaction();
+        Order order = realm.createObject(Order.class);
+        order.setId(orders.size());
+        order.setDishName(dishName);
+        order.setSpecialNote(specialNote);
+        realm.commitTransaction();
+
         addNewOrder(order);
+
         NotificationUtil.showOrderNotification(order);
     }
 
