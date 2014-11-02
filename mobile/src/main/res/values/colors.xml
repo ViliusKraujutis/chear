@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Dark shades-->
+    <color name="dark_shadows_95">#F2000000</color>
+    <color name="dark_shadows_90">#E6000000</color>
+    <color name="dark_shadows_85">#D9000000</color>
+    <color name="dark_shadows_80">#CC000000</color>
+    <color name="dark_shadows_75">#BF000000</color>
+    <color name="dark_shadows_70">#B3000000</color>
+    <color name="dark_shadows_65">#A6000000</color>
+    <color name="dark_shadows_60">#99000000</color>
+    <color name="dark_shadows_55">#8C000000</color>
+    <color name="dark_shadows_50">#80000000</color>
+    <color name="dark_shadows_45">#73000000</color>
+    <color name="dark_shadows_40">#66000000</color>
+    <color name="dark_shadows_35">#59000000</color>
+    <color name="dark_shadows_30">#4D000000</color>
+    <color name="dark_shadows_25">#40000000</color>
+    <color name="dark_shadows_20">#33000000</color>
+    <color name="dark_shadows_15">#26000000</color>
+    <color name="dark_shadows_10">#1A000000</color>
+    <color name="dark_shadows_5">#0D000000</color>
+
+    <!--Light shades-->
+    <color name="light_shadows_95">#f2ffffff</color>
+    <color name="light_shadows_90">#e6ffffff</color>
+    <color name="light_shadows_85">#d9ffffff</color>
+    <color name="light_shadows_80">#ccffffff</color>
+    <color name="light_shadows_75">#bfffffff</color>
+    <color name="light_shadows_70">#b3ffffff</color>
+    <color name="light_shadows_65">#a6ffffff</color>
+    <color name="light_shadows_60">#99ffffff</color>
+    <color name="light_shadows_55">#8cffffff</color>
+    <color name="light_shadows_50">#80ffffff</color>
+    <color name="light_shadows_45">#73ffffff</color>
+    <color name="light_shadows_40">#66ffffff</color>
+    <color name="light_shadows_35">#59ffffff</color>
+    <color name="light_shadows_30">#4dffffff</color>
+    <color name="light_shadows_25">#40ffffff</color>
+    <color name="light_shadows_20">#33ffffff</color>
+    <color name="light_shadows_15">#26ffffff</color>
+    <color name="light_shadows_10">#1affffff</color>
+    <color name="light_shadows_5">#0dffffff</color>
+</resources>
