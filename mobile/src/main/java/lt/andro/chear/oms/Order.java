@@ -1,23 +1,37 @@
 package lt.andro.chear.oms;
 
-import android.text.TextUtils;
+import io.realm.RealmObject;
 
 /**
  * @author Vilius Kraujutis
  * @since 2014-11-01 16:51
  */
-public class Order {
-    public final String dishName;
-    public final String specialNote;
-    public final int id;
+public class Order extends RealmObject {
+    private int id;
+    private String dishName;
+    private String specialNote;
 
-    public Order(String dishName, String specialNote, int id) {
-        this.dishName = dishName;
-        this.specialNote = specialNote;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public boolean hasSpecialNote() {
-        return TextUtils.isEmpty(specialNote);
+    public String getDishName() {
+        return dishName;
+    }
+
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
+    }
+
+    public String getSpecialNote() {
+        return specialNote;
+    }
+
+    public void setSpecialNote(String specialNote) {
+        this.specialNote = specialNote;
     }
 }

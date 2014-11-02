@@ -27,9 +27,8 @@ public class NotificationUtil {
         WearUtils.addDoneAction(builder, order);
         WearUtils.addRejectAction(builder, order);
 
-
-        builder.setContentTitle(order.dishName);
-        String specialNote = order.specialNote;
+        builder.setContentTitle(order.getDishName());
+        String specialNote = order.getSpecialNote();
         if (isLongNote(specialNote)) {
             builder.setContentText(context.getString(R.string.new_order_has_special_notes));
             addPage(extender, context.getString(R.string.new_order_page_title), specialNote);
@@ -46,7 +45,7 @@ public class NotificationUtil {
         notification.defaults |= Notification.DEFAULT_SOUND;
         notification.defaults |= Notification.DEFAULT_VIBRATE;
 
-        getNotificationService().notify(order.id, builder.extend(extender).build());
+        getNotificationService().notify(order.getId(), builder.extend(extender).build());
     }
 
     private static void addPage(NotificationCompat.WearableExtender extender, String contentTitle, String contentText) {
